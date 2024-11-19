@@ -1,0 +1,2 @@
+# read csv data
+project_dataset_og <- read.csv("https://data-science-intro.s3.us-east-2.amazonaws.com/SYRCityline_Requests.csv")
