@@ -1,6 +1,6 @@
 agency_table <- table(project_dataset_omit$Agency_Name)
 agency_proptable <- prop.table(category_table)
-agency_proptable #the majority of complaints are under the water & sewage agency
+agency_proptable #the majority of requests are under the garbage, recycling, & graffiti agency, followed by the water & sewage agency
 source_table <- table(project_dataset_omit$Report_Source)
 source_proptable <- prop.table(source_table)
-source_proptable
+source_proptable #most of the requests are filed  from request forms, with the next largest groups being iphone and portal
