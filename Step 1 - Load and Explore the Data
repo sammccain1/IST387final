@@ -1,6 +1,8 @@
 # library (rear)
 # read csv data
 project_dataset_og <- read.csv("https://data-science-intro.s3.us-east-2.amazonaws.com/SYRCityline_Requests.csv")
-dim(project_dataset_og)
-str(project_dataset_og)
+dim(project_dataset_og) #the dataset has 60208 rows and 21 columns
+str(project_dataset_og) #there is both numeric and character data present
 summary(project_dataset_og)
+sum(is.na(project_dataset_og)) #there are 9219 missing values in the dataset
+colSums(is.na(project_dataset_og)) #most missing values are in the description column
