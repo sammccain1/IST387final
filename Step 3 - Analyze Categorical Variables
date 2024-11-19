@@ -1,1 +1,6 @@
-
+agency_table <- table(project_dataset_omit$Agency_Name)
+agency_proptable <- prop.table(category_table)
+agency_proptable #the majority of complaints are under the water & sewage agency
+source_table <- table(project_dataset_omit$Report_Source)
+source_proptable <- prop.table(source_table)
+source_proptable
