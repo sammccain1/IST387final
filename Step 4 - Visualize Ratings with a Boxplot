@@ -1,1 +1,12 @@
+if ("Sla_in_hours" %in% colnames(project_dataset_og)) {
+  project_dataset_og$Sla_in_hours <- as.factor(project_dataset_og$Sla_in_hours)
+} else {
+  stop("The column 'Sla_in_hours' does not exist in the dataset.")
+}
 
+if ("Rating" %in% colnames(project_dataset_og)) {
+  ggplot(project_dataset_og, aes(x = Sla_in_hours, y = Rating)) + geom_boxplot(fill = "lightblue", outlier.color = "red") +
+    labs(title = "Boxplot of Ratings Grouped by SLA in Hours", x = "SLA in Hours", y = "Rating") + theme_minimal() + theme()
+} else {
+  stop("The column 'Rating' does not exist in the dataset.")
+}
