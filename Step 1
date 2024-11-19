@@ -1,3 +1,6 @@
 # library (rear)
 # read csv data
 project_dataset_og <- read.csv("https://data-science-intro.s3.us-east-2.amazonaws.com/SYRCityline_Requests.csv")
+dim(project_dataset_og)
+str(project_dataset_og)
+summary(project_dataset_og)
