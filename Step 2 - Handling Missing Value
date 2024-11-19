@@ -1,1 +1,2 @@
 project_dataset_omit <- na.omit(project_dataset_og)
+# We decided to use the na.omit function because there was too much missing data to interpolate, therefore na.interpolation() wouldn't be as good of a choice to handle null values.
