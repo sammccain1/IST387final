@@ -1,1 +1,11 @@
-
+library(stringr)
+library(ggplot2)
+project_dataset_omit$ZIP <- str_extract(project_dataset_omit$Address, "\\b13\\d{3}\\b") #this code uses the str_extract() function to extract any sequence from the "address" column that is a distinct sequence starting with 13 followed by 3 digits, which yields the zip codes
+project_dataset_omit <- na.omit(project_dataset_omit) #this code once again removes all missing values from the dataset, since some may have been created from the creation of the zip code column
+zip_hist <- ggplot(project_dataset_omit, aes(x=ZIP)) + geom_bar(stat = "count") + xlab("Zip Code") + ylab("Number of Requests") + ggtitle("Frequency of Requests by Zip Code") + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+zip_hist
+library(dplyr)
+project_dataset_omit$ZIP <- as.numeric(project_dataset_omit$ZIP)
+count_data <- count(project_dataset_omit, ZIP)
+highest_zip <- top_n(count_data, 1, n)
+highest_zip #The zip code with the highest number of requests is 13204, with 8739 requests
