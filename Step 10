@@ -1,0 +1,4 @@
+model <- lm(Minutes_to_closed ~ High_Rating + Sla_in_hours + Report_Mobile, 
+            data = df)
+summary(model)
+#All of the predictors are statistically significant, with p < 0.001. High_Rating increases closure time by 10,532 minutes on average. The different Sla_in_hours categories show varying effects, with some reducing closure time (decrease of 4,673 minutes for 72 hours) and others significantly increasing it (increase of 51,700 minutes for 288 hours). Report_mobile adds 2,172 minutes on average. Overall, the model is not a very good fit for the data, as shown by the very low R-squared value of 0.096, which suggests that additional variables may be useful for improving the model.
