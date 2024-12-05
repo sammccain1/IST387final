@@ -1,9 +1,11 @@
 library(dplyr)
 
+df <- project_dataset_og <- read.csv("https://data-science-intro.s3.us-east-2.amazonaws.com/SYRCityline_Requests.csv")
 df <- df %>%
   mutate(High_Rating = ifelse(Rating >= 3, 1, 0))
 df <- df %>%
   mutate(Report_Mobile = ifelse(Report_Source %in% c("Android", "iPhone", "Request – Mobile"), 1, 0))
 head(df[, c("Rating", "High_Rating", "Report_Source", "Report_Mobile")])
+
 table(df$High_Rating)
 table(df$Report_Mobile)
