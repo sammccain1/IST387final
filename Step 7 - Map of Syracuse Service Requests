@@ -2,15 +2,24 @@ library(tigris)
 library(ggplot2)
 library(sf)
 
-# Get city boundaries for New York state
 ny_cities <- places(state = "NY", cb = TRUE)
-
-# Filter for Syracuse
 syracuse_boundary <- ny_cities %>% filter(NAME == "Syracuse")
-
-# Create base map
 city_map <- ggplot() +
-geom_sf(data = syracuse_boundary, fill = "white", color = "black") +
-coord_sf() +
-ggtitle("City of Syracuse Boundary") +
-theme_minimal()
+  geom_sf(data = syracuse_boundary, fill = "white", color = "black") +
+  coord_sf() +
+  ggtitle("City of Syracuse Boundary") +
+  theme_minimal()
+city_map
+
+requests_sf <- st_as_sf(project_dataset_omit, 
+                                coords = c("Lng", "Lat"), 
+                                crs = st_crs(syracuse_boundary))
+
+city_map <- city_map +
+  geom_sf(data = requests_sf, 
+          aes(color = Rating), 
+          size = 1, 
+          alpha = 0.7) +
+  scale_color_viridis_c() +
+  ggtitle("Service Requests in Syracuse by Rating")
+city_map
