@@ -12,4 +12,4 @@ rules <- apriori(
   transactions,
   parameter = list(support = 0.01, confidence = 0.5, minlen = 2), appearance = list(rhs = c("High_Rating=1"), default = "lhs"))
 
-inspect(sort(rules, by = "lift"))
+inspect(head(sort(rules, by = "lift"), 10))
