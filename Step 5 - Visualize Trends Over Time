@@ -1,8 +1,9 @@
-project_dataset_og$Created_at_local <- as.POSIXct(project_dataset_og$Created_at_local,format = "%m/%d/%Y - %I:%M%p", tz = "UTC")
+library(ggplot2)
+project_dataset_omit$Created_at_local <- as.POSIXct(project_dataset_omit$Created_at_local,format = "%m/%d/%Y - %I:%M%p", tz = "UTC")
 
-ggplot(project_dataset_og, aes(x = Created_at_local, y = project_dataset_og$Report_Source)) +
+ggplot(project_dataset_omit, aes(x = Created_at_local, y = project_dataset_omit$Report_Source)) +
   geom_line(color = "blue") +  # Add a line for the service requests
   labs(title = "Service Requests Over Time", 
        x = "Date", 
        y = "Number of Service Requests") +
-  theme_minimal()
+  theme_minimal()  
