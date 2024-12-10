@@ -1,9 +1,22 @@
+library(dplyr)
 library(ggplot2)
-project_dataset_omit$Created_at_local <- as.POSIXct(project_dataset_omit$Created_at_local,format = "%m/%d/%Y - %I:%M%p", tz = "UTC")
 
-ggplot(project_dataset_omit, aes(x = Created_at_local, y = project_dataset_omit$Report_Source)) +
-  geom_line(color = "blue") +  # Add a line for the service requests
-  labs(title = "Service Requests Over Time", 
-       x = "Date", 
+project_dataset_omit <- project_dataset_omit %>%
+  mutate(Created_at_local = as.POSIXct(Created_at_local, format = "%Y-%m-%d %H:%M:%S", tz = "UTC"))
+
+project_dataset_omit <- project_dataset_omit %>%
+  mutate(Created_at_date = as.Date(Created_at_local))
+
+aggregated_data <- project_dataset_omit %>%
+  mutate(Week = as.Date(cut(Created_at_date, breaks = "week"))) %>%  # Group by week
+  group_by(Week) %>%
+  summarise(Count = n())
+
+ggplot(aggregated_data, aes(x = Week, y = Count, group = 1)) +
+  geom_line(color = "blue") +  # Use a line for weekly aggregated data
+  labs(title = "Service Requests Over Time (Weekly)", 
+       x = "Month", 
        y = "Number of Service Requests") +
-  theme_minimal()  
+  theme_minimal() +
+  scale_x_date(date_labels = "%b %Y", date_breaks = "1 month") +  
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  
