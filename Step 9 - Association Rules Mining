@@ -1,15 +1,23 @@
+# Ensure required libraries are loaded
 library(arules)
+library(arulesViz)
 
 df$High_Rating <- as.factor(df$High_Rating)
 df$Report_Source <- as.factor(df$Report_Source)
 df$Agency_Name <- as.factor(df$Agency_Name)
 df$Sla_in_hours <- as.factor(df$Sla_in_hours)
-df$ZIP <- as.factor(df$ZIP)
 
-transactions <- as(df, "transactions")
+Rating_transactions <- as(df, "transactions")
 
-rules <- apriori(
-  transactions,
-  parameter = list(support = 0.01, confidence = 0.5, minlen = 2), appearance = list(rhs = c("High_Rating=1"), default = "lhs"))
+Rating_rules <- apriori(
+  Rating_transactions,
+  parameter = list(supp = 0.05, conf = 0.3),
+  appearance = list(default = "lhs", rhs = "High_Rating=1"),
+  control = list(verbose = FALSE)
+)
 
-inspect(head(sort(rules, by = "lift"), 10))
+item_freq <- itemFrequency(Rating_transactions)
+sorted_items <- sort(item_freq, decreasing = TRUE)
+top_10_items <- head(sorted_items, 10)
+top_10_items
+# The dataset reveals key patterns in transaction frequencies, with Report_Mobile=[0,1]. This item appears in 100% of transactions, which indicate a universal property of all transactions, such as all reports being mobile-based, or the variable being present across all data.A majority of transactions (81.3%) have a low rating (High_Rating=0), and 67.8% originate from the "Request Form" source. Significant portions of the data involve the agency "Garbage, Recycling & Graffiti" (44.3%) and transactions with a service-level agreement of 48 hours (34.9%). Geographic or numeric variables like Lat=[43.03,43.06) and Y=[5.317e+06,5.321e+06) are moderately represented (33.3%).
