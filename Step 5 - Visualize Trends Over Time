@@ -15,7 +15,7 @@ aggregated_data <- project_dataset_omit %>%
 ggplot(aggregated_data, aes(x = Week, y = Count, group = 1)) +
   geom_line(color = "blue") +  # Use a line for weekly aggregated data
   labs(title = "Service Requests Over Time (Weekly)", 
-       x = "Month", 
+       x = "Date", 
        y = "Number of Service Requests") +
   theme_minimal() +
   scale_x_date(date_labels = "%b %Y", date_breaks = "1 month") +  
