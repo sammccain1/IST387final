@@ -5,4 +5,4 @@ ggplot(project_dataset_og, aes(x = Created_at_local, y = project_dataset_og$Repo
   labs(title = "Service Requests Over Time", 
        x = "Date", 
        y = "Number of Service Requests") +
-  theme_minimal()                              
+  theme_minimal()
