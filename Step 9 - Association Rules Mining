@@ -1,1 +1,15 @@
+library(arules)
 
+df$High_Rating <- as.factor(df$High_Rating)
+df$Report_Source <- as.factor(df$Report_Source)
+df$Agency_Name <- as.factor(df$Agency_Name)
+df$Sla_in_hours <- as.factor(df$Sla_in_hours)
+df$ZIP <- as.factor(df$ZIP)
+
+transactions <- as(df, "transactions")
+
+rules <- apriori(
+  transactions,
+  parameter = list(support = 0.01, confidence = 0.5, minlen = 2), appearance = list(rhs = c("High_Rating=1"), default = "lhs"))
+
+inspect(sort(rules, by = "lift"))
