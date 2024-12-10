@@ -11,8 +11,7 @@ toks_nostop <- tokens_select(toks, pattern = stopwords("en"), selection = "remov
 Description_dfm <- dfm(toks_nostop)
 textplot_wordcloud(Description_dfm, min_count = 1000)
 textstat_frequency(Description_dfm, 5)
-# We have observed 7572 times when people wrote "skipped" in the description, which was surprising because many trash stations were skipped for pickup.
-
+# # The two most frequently used words were "trash" and "skipped." This indicates that a large portion of service reports had to do with people's trash pickup being skipped, which seems to be a common problem.
 
 ```{r}
 install.packages("quanteda")
